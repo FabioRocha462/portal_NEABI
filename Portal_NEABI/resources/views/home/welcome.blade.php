@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Login Admin')
+@section('title', '')
 @section('content')
     <section>
         <div class="carousel slide carousel-fade" id="carouselExampleFade" data-bs-ride="carousel">

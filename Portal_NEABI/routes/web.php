@@ -21,3 +21,6 @@ Route::get('/login_admin', function () {
 Route::get('/create_login', function () {
     return view('Admin/create_login');
 });
+Route::get('/create_event', function () {
+    return view('Admin/create_event');
+});
