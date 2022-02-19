@@ -19,14 +19,14 @@ Route::get('/', function () {
     return view('home/welcome');
 });
 
-Route::get('/login_admin', function () {
+Route::get('admin/login', function () {
     return view('Admin/login');
 });
 Route::get('/create_login', function () {
     return view('Admin/create_login');
 });
-Route::get('/create_event', function () {
-    return view('Admin/create_event');
+Route::get('/create_event', function () { 
+    return view('evento/create');
 });
 /*
 Route::resource('admin', AdminController::class)->only([
@@ -39,5 +39,11 @@ Route::resource('admin', AdminController::class)->except([
 Route::resource('admin', AdminController::class);
 Route::resource('participante',ParticipanteController::class);
 Route::resource('noticia',NoticiaController::class);
-Route::resource('evento',EventoController::class);
+Route::resource('evento',EventoController::class); 
  
+Route::get('/criando', function(){
+    return view('participante/create');
+});
+Route::get('/login', function(){
+    return view('Participante/login');
+});

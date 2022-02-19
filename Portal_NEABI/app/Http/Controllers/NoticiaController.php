@@ -6,14 +6,28 @@ use Illuminate\Http\Request;
 
 class NoticiaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    private $noticia = [
+        ['id'=>1, 'titulo'=>"aqui é um titulo",'descricao'=>'isso é uma descrição','categoria'=>'racismo'],
+        ['id'=>2, 'titulo'=>'aqui é outro titulo','descricao'=>'isso é outra descrição', 'categoria'=>'pluralidade'],
+        ['id'=>3, 'titulo'=>'Ta dando certo','descricao'=>'aqui também é outra descrição de teste', 'categoria'=>'deus é bom']
+    ];
+    public function __construct(){
+        $noticia = session('noticia');
+        if(!isset($noticia)){
+            session(['noticia'=>$this->noticia]);
+        }
+    }
     public function index()
     {
         //
+        $noticia =session('noticia');
+        return view('noticia.index',compact(['noticia']));
     }
 
     /**
@@ -24,6 +38,7 @@ class NoticiaController extends Controller
     public function create()
     {
         //
+        return view('noticia.create');
     }
 
     /**
@@ -35,6 +50,16 @@ class NoticiaController extends Controller
     public function store(Request $request)
     {
         //
+        $noticia = session('noticia');
+        $id= count($noticia) +1;
+        $titulo=  $request->titulo;
+        $descricao= $request->descricao;
+        $categoria= $request->categoria;
+        $dados = ["id"=>$id, "titulo"=>$titulo, "descricao"=>$descricao, "categoria"=>'categoria'];
+        $noticia[] = $dados;
+        session(['noticia'=>$noticia]);
+        return redirect()->route('noticia.index');
+
     }
 
     /**
@@ -46,6 +71,9 @@ class NoticiaController extends Controller
     public function show($id)
     {
         //
+        $noticia= session('noticia');
+        $noticia = $noticia[$id -1];
+        return view('noticia.show', compact(['noticia']));
     }
 
     /**

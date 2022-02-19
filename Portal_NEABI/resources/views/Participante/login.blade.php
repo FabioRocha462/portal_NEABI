@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Login Admin')
+@section('title', 'Login Participante')
 @section('content')
     <link rel="stylesheet" href={{URL::asset('css/admin/login.css')}}>
 <main class="container">

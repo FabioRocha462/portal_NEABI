@@ -1,0 +1,4 @@
+div.menu {
+    grid-area: menu;
+    background-color: var(--bg-dark);
+}

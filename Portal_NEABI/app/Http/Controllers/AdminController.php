@@ -11,12 +11,23 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $admin=[
+        ['id'=>1,'nome'=>'fabio rocha','email'=>'rochafabio462@gmail.com','senha'=>'fabio123'],
+        ['id'=>2,'nome'=>'aline morais','email'=>'alinepereirajp@gmail.com','senha'=>'aline123'],
+
+    ];
+    public function __construct(){
+        $admin = session('admin');
+        if(!isset($admin)){
+            session(['admin'=>$this->admin]);
+        }
+    }
  
     public function index()
     {
         //
-        $nome="Fabio";
-        return view('Admin.index',compact('nome'));
+        $admin =session('admin');
+        return view('admin.index',compact(['admin']));
         
     }
 
@@ -28,6 +39,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+        return view('admin.create');
     }
 
     /**
@@ -39,6 +51,15 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        $admin = session('admin');
+        $id= count($admin) +1;
+        $nome=  $request->nome;
+        $email= $request->email;
+        $senha= $request->senha;
+        $dados = ["id"=>$id, "nome"=>$nome, "email"=>$email, "senha"=>'senha'];
+        $admin[] = $dados;
+        session(['admin'=>$admin]);
+        return redirect()->route('admin.index');
     }
 
     /**
@@ -49,7 +70,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

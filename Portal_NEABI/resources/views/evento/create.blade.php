@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Criar Evento')
 @section('content')
-<link rel="stylesheet" href={{URL::asset('css/create_event.css')}}>
+<link rel="stylesheet" href={{URL::asset('css/create.css')}}>
     <main class="container">
      <div class="evento">   
         <div class="row">
