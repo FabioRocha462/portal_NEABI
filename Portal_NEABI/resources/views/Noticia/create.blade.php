@@ -11,11 +11,10 @@
                 <label for="exampleFormControlTextarea1" class="form-label"></label>
                 <textarea class="form-control" name='descricao' id="exampleFormControlTextarea1" rows="3" placeholder="Descreva sua Notícia?"></textarea>
                        <hr>
-                       
-                <input class="form-control form-control-lg" id="formFileLg" type="file">
-                <p>Escolha uma imagem para a Notícia</p>
+                <label for="formFileLg" class="form-label">URL da imagem</label>       
+                <input class="form-control form-control-lg" id="formFileLg" type="text" name="url">
                         <hr>
-                <label for="exampleDataList" class="form-label"></label>
+                <label for="exampleDataList" class="form-label">Categoria</label>
                                             <input class="form-control" name='categoria' list="datalistOptions" id="exampleDataList" placeholder="Escolha a categoria para a notícia">
                                             <datalist id="datalistOptions">
                                             <option value="Show musical">

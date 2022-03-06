@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Illuminate\Http\Request;
+
+use App\Models\Noticia;
+use Illuminate\Support\Facades\Date;
 
 class NoticiaController extends Controller
 {
@@ -12,22 +16,13 @@ class NoticiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $noticia = [
-        ['id'=>1, 'titulo'=>"aqui é um titulo",'descricao'=>'isso é uma descrição','categoria'=>'racismo'],
-        ['id'=>2, 'titulo'=>'aqui é outro titulo','descricao'=>'isso é outra descrição', 'categoria'=>'pluralidade'],
-        ['id'=>3, 'titulo'=>'Ta dando certo','descricao'=>'aqui também é outra descrição de teste', 'categoria'=>'deus é bom']
-    ];
-    public function __construct(){
-        $noticia = session('noticia');
-        if(!isset($noticia)){
-            session(['noticia'=>$this->noticia]);
-        }
-    }
+   
+  
     public function index()
     {
         //
-        $noticia =session('noticia');
-        return view('noticia.index',compact(['noticia']));
+        $noticias = Noticia::all();
+       return view('noticia.index',['noticias'=>$noticias]);
     }
 
     /**
@@ -50,16 +45,14 @@ class NoticiaController extends Controller
     public function store(Request $request)
     {
         //
-        $noticia = session('noticia');
-        $id= count($noticia) +1;
-        $titulo=  $request->titulo;
-        $descricao= $request->descricao;
-        $categoria= $request->categoria;
-        $dados = ["id"=>$id, "titulo"=>$titulo, "descricao"=>$descricao, "categoria"=>'categoria'];
-        $noticia[] = $dados;
-        session(['noticia'=>$noticia]);
-        return redirect()->route('noticia.index');
-
+       $noticias = new Noticia;
+       $noticias->titulo = $request->titulo ;
+       $noticias->descricao = $request->descricao ;
+       $noticias->categoria= $request->categoria ;
+       $noticias->url =$request->url;
+       $noticias->data_edicao = new DateTime();
+       $noticias->save();
+       return view('noticia.index');
     }
 
     /**
@@ -71,9 +64,9 @@ class NoticiaController extends Controller
     public function show($id)
     {
         //
-        $noticia= session('noticia');
-        $noticia = $noticia[$id -1];
-        return view('noticia.show', compact(['noticia']));
+        $noticia = Noticia::findOrFail($id);
+        return view("noticia.show", ['noticia'=>$noticia]);
+       
     }
 
     /**
@@ -85,6 +78,9 @@ class NoticiaController extends Controller
     public function edit($id)
     {
         //
+        $noticias = Noticia::findOrFail($id);
+        return view('noticia.edit',['noticias'=>$noticias]);
+        
     }
 
     /**
@@ -97,6 +93,7 @@ class NoticiaController extends Controller
     public function update(Request $request, $id)
     {
         //
+       
     }
 
     /**
@@ -108,5 +105,9 @@ class NoticiaController extends Controller
     public function destroy($id)
     {
         //
+        
     }
+   
+
+
 }

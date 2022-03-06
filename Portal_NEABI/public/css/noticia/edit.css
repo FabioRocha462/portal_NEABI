@@ -7,14 +7,15 @@ main{
     align-items: center;
     justify-content: center;
  }
-.evento{
-   background:rgb(214, 214, 15);
-   padding:2rem;
-   min-width: 500px;
-    min-height: 500px;
-   box-shadow: 5px 5px 15px rgba(0,0,0,2);
-   border-radius:8px;
-}
-.col{
-   margin-right: 0px;
-}
+ 
+ .create{
+    background:rgb(214, 214, 15);
+    padding:2rem;
+    min-width: 500px;
+     min-height: 500px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,2);
+    border-radius:8px;
+ }
+ .create,p{
+     text-align: center;
+ }

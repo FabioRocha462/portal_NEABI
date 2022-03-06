@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 main{
     font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    min-width: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
  }
  .index{
-   max-width: 200vh;
- }
- .index,p{
-     text-align: center;
- }
- .icons{
-   display: flex;
- }
- button{
-   margin:0%;
+ 
+    min-width: 100px;
+     min-height: 500px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,2);
+    border-radius:8px;
  }

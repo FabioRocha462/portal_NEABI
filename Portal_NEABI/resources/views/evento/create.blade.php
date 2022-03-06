@@ -1,92 +1,85 @@
 @extends('layouts.main')
 @section('title', 'Criar Evento')
 @section('content')
-<link rel="stylesheet" href={{URL::asset('css/create.css')}}>
+<link rel="stylesheet" href="{{URL::asset('css/evento/create.css')}}">
     <main class="container">
+
      <div class="evento">   
         <div class="row">
+            <h2>Crie seu Evento</h2>
             <div class="col-lg-12">
-                <form action="processa.php" method="POST">
+                <form action="{{route('evento.store')}}" method="POST">
+                    @csrf
                     <div id="step_1" class="step">
-                                <input class="form-control form-control-lg" type="text" placeholder="Qual o nome do seu evento?" aria-label=".form-control-lg example">
+                                <input class="form-control form-control-lg" type="text" name="nome"placeholder="Qual o nome do seu evento?" aria-label=".form-control-lg example">
                                 <label for="exampleFormControlTextarea1" class="form-label"></label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descreva seu evento?"></textarea>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" name="descricao" placeholder="Descreva seu evento?"></textarea>
                                 <hr>
                                 <div class="row">
                                     <div class="col">
-                                    <input type="date" class="form-control" placeholder="First name" aria-label="First name">
+                                    <input type="date" name= "data" class="form-control" placeholder="First name" aria-label="First name">
                                     </div>
                                     <div class="col">
-                                    <input type="date" class="form-control" placeholder="Last name" aria-label="Last name">
+                                        <div class="row">  
+                                            <div class="col">
+                                                <input type="time" name="hora_inicio" class="form-label" placeholder="Hora de Inicio">
+                                                <p>Inicio do Evento</p>
+                                            </div> 
+                                              
+                                            <div class="col">
+                                                <input type="time" class="form-label" mame= "hora_termino" placeholder="Termino">
+                                                <p>Termíno do Evento</p>
+                                           </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <br>
+                                          <input type="number" name="capacidade" class="form-label" placeholder="Capacidade?" >
+                                    </div>
+                                    <div class="col">
+                                        <label for="exampleDataList" class="form-label"></label>
+                                        <input class="form-control" list="datalistOptions" id="exampleDataList" name="modo" placeholder="modo?">
+                                        <datalist id="datalistOptions">
+                                        <option value="online">
+                                        <option value="presencial">
+                                        </datalist>
                                     </div>
                                 </div>
                                 <label for="exampleDataList" class="form-label"></label>
-                                    <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Escolha a categoria do seu Evento">
+                                    <input class="form-control" list="datalistOptions" id="exampleDataList" name="categoria" placeholder="categoria do seu Evento?">
                                     <datalist id="datalistOptions">
                                     <option value="Show musical">
                                     <option value="Teatro">
                                     <option value="Cinema">
                                     <option value="Palestra">
                                     <option value="Leitura">
+                                    <option value="Outros">
                                     </datalist>
                                     <hr>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="input-group mb-3">
-                                            <div class="d-grid gap-2 col-6 mx-auto">                                                  <div class="input-group-text">
-                                                    <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                                                    </div>
-                                                    <h3> Presencial</h3>
-                                                </div>
-                                        </div>    
-                                    </div>
-                                    <div class="col">
-                                        <div class="input-group mb-3">
-                                            <div class="d-grid gap-2 col-6 mx-auto">
-                                                <div class="input-group-text">
-                                                <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                                                </div>
-                                                <h3> Online</h3>
-                                            </div>
-                                        </div>    
-                                    </div>
-                                  </div>
                                 
                                 
                      </div>
                       
                     <div id="step_2" class="step">
-                        <input class="form-control form-control-lg" type="text" placeholder="Organizadores?" aria-label=".form-control-lg example">
+                        <label for="formFileLg" class="form-label">Ornizadores</label>
+                        <input class="form-control form-control-lg" id="formFileLg" type="text" name = "organizadores" placeholder="Organizadores?" aria-label=".form-control-lg example">
                         <label for="formFileLg" class="form-label"></label>
-                        <input class="form-control form-control-lg" id="formFileLg" type="file" placeholder="Escolha a imagem de seu Evento">
-                        <hr>
-                        <div class="row">
-                            <div class="col">
-                                <input type="number" class="form-label" placeholder="Capacidade?" >
-                            </div>   
-                            <div class="col">
-                                <input type="time" class="form-label" placeholder="Hora de Inicio">
-                                <p>Inicio do Evento</p>
-                            </div> 
-                              
-                            <div class="col">
-                                <input type="time" class="form-label" placeholder="Termino">
-                                <p>Termíno do Evento</p>
-                           </div>
-                    </div>
-                    <hr>
+                        <input class="form-control form-control-lg" id="formFileLg" name="url" type="text" placeholder="URL da imagem">
+                    <br>
                     <div class="row">
                         <div class="col">
                             <div class="input-group mb-3">
                                 <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button class="btn btn-primary"  type="reset">Anterior</button>
+                                    <button class="btn btn-danger"  type="reset">Cancelar</button>
                                   </div>
                               </div>
                         </div>
                         <div class="col">
                             <div class="input-group mb-3">
                                 <div class="d-grid gap-2 col-6 mx-auto">
-                                    <button class="btn btn-primary"  type="submit">Próximo</button>
+                                    <button class="btn btn-primary"  type="submit">Confirmar</button>
                                   </div>
                               </div>
                         </div>

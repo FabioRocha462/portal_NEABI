@@ -6,18 +6,18 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="{{URL::asset('css/estilo.css')}}">
   </head>
   <body> 
     <header class="menu-area">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid"><img class="navbar-brand" src="../img/Logo-NEABI-horizontal- SEM FUNDO.png" width="200px" height="70px">
+        <div class="container-fluid"><a href="{{URL::asset('http://portal_neabi/')}}"><img class="navbar-brand" src="{{URL::asset('/img/Logo-NEABI-horizontal- SEM FUNDO.png')}}" width="200px" height="70px"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" style="width: 0rem;">
-              <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="../index.html">Inicio  </a></li>
-              <li class="nav-item"><a class="nav-link text-dark" aria-current="page" href="../Conceitos.html">Conceitos</a></li>
-              <li class="nav-item"> <a class="nav-link text-dark" href="../noticias.html">Notícias</a></li>
+              <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="#"><button type="button" class="btn btn-warning">Login</button></a></li>
+              <li class="nav-item"><a class="nav-link text-dark" aria-current="page" href="{{route('evento.index')}}">Eventos</a></li>
+              <li class="nav-item"> <a class="nav-link text-dark" href="{{route('noticia.index')}}">Notícias</a></li>
               <li class="nav-item"> <a class="nav-link text-dark" href="../depoimentos.html">Depoimentos</a></li>
               <li class="nav-item"><a class="nav-link text-dark" href="../duvidas.html">Dúvidas</a></li>
               <li class="nav-item"> <a class="nav-link text-dark" href="../Sobre.html">Sobre</a></li>
@@ -27,7 +27,7 @@
         </div>
       </nav>
     </header>
-    @yield('content')
+    @yield('content')              
     <footer class="footer">
       <div class="container p-6">
         <div class="row justify-content-md-center">
@@ -55,7 +55,7 @@
             <h4 class="text-light">Apoio:</h4>
             <ul class="list-unstyled mb-0">
               <li> 
-                <div class="col-xs-12" style="justify-content: flex-end;"><img src="../img/LogoIFRN- branca.png" width="190px" height="80px" alt="Logo IFRN"></div>
+                <div class="col-xs-12" style="justify-content: flex-end;"><img src="{{URL::asset('/img/LogoIFRN- branca.png')}}" width="190px" height="80px" alt="Logo IFRN"></div>
               </li>
             </ul>
           </div>

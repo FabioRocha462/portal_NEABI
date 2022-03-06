@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Evento;
 
 class EventoController extends Controller
 {
@@ -11,9 +12,15 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    
     public function index()
     {
         //
+        $eventos = Evento::all();
+        return view('evento.index',['eventos'=>$eventos]);
+        
+
     }
 
     /**
@@ -24,6 +31,7 @@ class EventoController extends Controller
     public function create()
     {
         //
+        return view('evento.create');
     }
 
     /**
@@ -35,6 +43,7 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
@@ -46,6 +55,7 @@ class EventoController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -57,6 +67,7 @@ class EventoController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -69,6 +80,7 @@ class EventoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        
     }
 
     /**
@@ -80,5 +92,7 @@ class EventoController extends Controller
     public function destroy($id)
     {
         //
+        
     }
+   
 }
