@@ -15,13 +15,25 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"> </span></button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" style="width: 0rem;">
-              <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="#"><button type="button" class="btn btn-warning">Login</button></a></li>
+              @guest
+              <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="/login"><button type="button" class="btn btn-warning">Login</button></a></li>
+              <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="/register"><button type="button" class="btn btn-warning">Cadastrar</button></a></li>
+              @endguest
+              <li class="nav-item"> <a class="nav-link text-dark" href="#">Conceitos</a></li>
+              <li class="nav-item"> <a class="nav-link text-dark" href="#">Sobre</a></li>
+              @auth
               <li class="nav-item"><a class="nav-link text-dark" aria-current="page" href="{{route('evento.index')}}">Eventos</a></li>
               <li class="nav-item"> <a class="nav-link text-dark" href="{{route('noticia.index')}}">Notícias</a></li>
-              <li class="nav-item"> <a class="nav-link text-dark" href="../depoimentos.html">Depoimentos</a></li>
-              <li class="nav-item"><a class="nav-link text-dark" href="../duvidas.html">Dúvidas</a></li>
-              <li class="nav-item"> <a class="nav-link text-dark" href="../Sobre.html">Sobre</a></li>
-              <li class="nav-item"> <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a></li>
+              <li class="-item"> 
+                <form action="/logout" method="POST">
+                  @csrf
+                  <a href="logout" class="nav-link" onclick="event.preventDefault();
+                  this.closest('form').submit();" >
+                  Sair
+                    </a>
+                </form>
+              </li>
+              @endauth
             </ul>
           </div>
         </div>

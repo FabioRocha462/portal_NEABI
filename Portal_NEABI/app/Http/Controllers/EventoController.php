@@ -12,7 +12,10 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
     public function index()
     {
@@ -43,7 +46,20 @@ class EventoController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $eventos = new Evento;
+        $eventos->nome = $request->nome ;
+        $eventos->descricao = $request->descricao ;
+        $eventos->data = $request->data;
+        $eventos->categoria = $request->categoria;
+        $eventos->url = $request->url;
+        $eventos->modo = $request->modo;
+        $eventos->organizadores = $request->organizadores;
+        $eventos->capacidade = $request->capacidade;
+        $eventos->hora_inicio = $request->hora_inicio;
+        $eventos->hora_termino = $request->hora_termino;
+        $eventos->status = true;
+        $eventos->save();
+       return view('evento.index',['eventos'=>$eventos]);
     }
 
     /**
@@ -55,6 +71,8 @@ class EventoController extends Controller
     public function show($id)
     {
         //
+        $evento = Evento::findOrFail($id);
+        return view("evento.show", ['evento'=>$evento]);
         
     }
 
@@ -67,6 +85,8 @@ class EventoController extends Controller
     public function edit($id)
     {
         //
+        $evento = Evento::findOrFail($id);
+        return view('evento.edit',['evento'=>$evento]);
         
     }
 
@@ -79,7 +99,16 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        {
+            $dadosform = $request->all();
+            $evento = Evento::findOrFail($id);
+            $update = $evento->update($dadosform);
+            if($update)
+                return redirect()->route('evento.index');
+            else 
+                return redirect()->route('evento.edit', $id);
+     
+         }
         
     }
 
@@ -92,6 +121,8 @@ class EventoController extends Controller
     public function destroy($id)
     {
         //
+        Evento::findOrFail($id)->delete();
+        return redirect('evento');
         
     }
    

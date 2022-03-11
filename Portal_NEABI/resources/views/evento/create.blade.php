@@ -27,7 +27,7 @@
                                             </div> 
                                               
                                             <div class="col">
-                                                <input type="time" class="form-label" mame= "hora_termino" placeholder="Termino">
+                                                <input type="time" class="form-label" name= "hora_termino" placeholder="Termino">
                                                 <p>Termíno do Evento</p>
                                            </div>
                                     </div>

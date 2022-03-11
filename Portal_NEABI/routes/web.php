@@ -3,6 +3,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ParticipanteController;
+use App\Http\Controllers\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('home/welcome');
+    return view('home.welcome');
 });
-
+/*
 Route::get('admin/login', function () {
     return view('Admin/login');
 });
@@ -28,6 +29,7 @@ Route::get('/create_login', function () {
 Route::get('/create_event', function () { 
     return view('evento/create');
 });
+*/
 /*
 Route::resource('admin', AdminController::class)->only([
     'index', 'show'
@@ -40,10 +42,16 @@ Route::resource('admin', AdminController::class);
 Route::resource('participante',ParticipanteController::class);
 Route::resource('noticia',NoticiaController::class);
 Route::resource('evento',EventoController::class); 
- 
+/*
 Route::get('/criando', function(){
     return view('participante/create');
 });
 Route::get('/login', function(){
     return view('Participante/login');
 });
+*/
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return view('home.welcome');
+})->name('dashboard');
+
+

@@ -16,6 +16,10 @@ class NoticiaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
    
   
     public function index()
@@ -52,7 +56,7 @@ class NoticiaController extends Controller
        $noticias->url =$request->url;
        $noticias->data_edicao = new DateTime();
        $noticias->save();
-       return view('noticia.index');
+       return view('noticia.index',['noticias'=>$noticias]);
     }
 
     /**
@@ -92,8 +96,15 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-       
+       $dadosform = $request->all();
+       $noticia = Noticia::findOrFail($id);
+       $noticia->data_edicao = new DateTime();
+       $update = $noticia->update($dadosform);
+       if($update)
+           return redirect()->route('noticia.index');
+       else 
+           return redirect()->route('noticia.edit', $id);
+
     }
 
     /**
@@ -105,6 +116,8 @@ class NoticiaController extends Controller
     public function destroy($id)
     {
         //
+        Noticia::findOrFail($id)->delete();
+        return redirect('noticia');
         
     }
    
