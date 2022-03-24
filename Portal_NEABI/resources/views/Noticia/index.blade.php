@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Noticias')
+<link rel="stylesheet" href="{{URL::asset('css/estilo.css')}}">
 @section('content')
 <link rel="stylesheet" href={{URL::asset('css/Noticia/index.css')}}>
     <main class='container'>
@@ -15,7 +16,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                      @foreach ($noticias as $n)
+                    @foreach ($noticias as $n)
                     <tr>
                                   <th>{{$n->id}}</th>
                                   <td>{{$n->titulo}}</td>
@@ -46,7 +47,7 @@
                                      </div>  
                                   </td>
                     </tr>
-                    @endforeach  
+                    @endforeach 
                   </tbody>
                 </table>
             </div>

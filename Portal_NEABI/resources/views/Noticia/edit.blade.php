@@ -5,7 +5,7 @@
 <main class="container">
     <div class="create"> 
             <h2>Edite sua Notícia aqui!</h2>
-            <form action="{{route('noticia.update',$noticias->id)}}" method="POST">
+            <form action="{{route('noticia.update',$noticias->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <label for="Titulo" class="form-label">Título</label>
@@ -13,8 +13,10 @@
                 <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
                <textarea class="form-control"  name='descricao'  id="exampleFormControlTextarea1" rows="10" placeholder="Descreva sua Notícia?">{{$noticias->descricao}}</textarea>
                        <hr>
-               <label for="formFileLg" class="form-label">URL da Imagem</label>      
-                <input class="form-control form-control-lg" id="formFileLg" type="text" name='url' value='{{$noticias->url}}'>
+                       <div>
+                       <label for="formFileLg" class="form-label">Imagem da Notícia</label>
+                       <input name="url" value="{{$noticias->categoria}}" class="form-control form-control-lg" id="formFileLg" type="file">
+                     </div>
                         <hr>
                 <label for="exampleDataList" class="form-label">Categoria</label>
                                             <input  type= "text" class="form-control"  name='categoria'  list="datalistOptions" value='{{$noticias->categoria}}' id="exampleDataList" placeholder="Escolha a categoria para a notícia">

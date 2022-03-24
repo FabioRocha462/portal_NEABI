@@ -8,7 +8,7 @@
         <div class="row">
             <h2>Crie seu Evento</h2>
             <div class="col-lg-12">
-                <form action="{{route('evento.store')}}" method="POST">
+                <form action="{{route('evento.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div id="step_1" class="step">
                                 <input class="form-control form-control-lg" type="text" name="nome"placeholder="Qual o nome do seu evento?" aria-label=".form-control-lg example">
@@ -65,8 +65,9 @@
                     <div id="step_2" class="step">
                         <label for="formFileLg" class="form-label">Ornizadores</label>
                         <input class="form-control form-control-lg" id="formFileLg" type="text" name = "organizadores" placeholder="Organizadores?" aria-label=".form-control-lg example">
-                        <label for="formFileLg" class="form-label"></label>
-                        <input class="form-control form-control-lg" id="formFileLg" name="url" type="text" placeholder="URL da imagem">
+                        <label for="formFileLg" class="form-label">Large file input example</label>
+                        <input name="url" class="form-control form-control-lg" id="formFileLg" type="file">
+                      </div>
                     <br>
                     <div class="row">
                         <div class="col">
@@ -88,48 +89,12 @@
             </div>
         </div>
      </div>  
+     @if ($errors->any())
+           <div class="card-footer"></div>
+              @foreach ($errors->all as $erro)
+                <div claass="alert alert-danger" role="alert">
+                    {{$erro}}</div>  
+              @endforeach
+        @endif
     </main>
-    <script>
-        $(document).ready(function(){
-       
-           //Esconde todos os passos e exibe o primeiro ao carregar a página 
-           $('.step').hide();
-           $('.step').first().show();
-       
-           //Exibe no topo em qual passo estamos pela ordem da div que esta visivel
-           var passoexibido = function(){
-               var index = parseInt($(".step:visible").index());
-               if(index == 0){
-                   //Se for o primeiro passo desabilita o botão de voltar
-                   $("#prev").prop('disabled',true);
-               }else if(index == (parseInt($(".step").length)-1)){
-                   //Se for o ultimo passo desabilita o botão de avançar
-                   $("#next").prop('disabled',true);
-               }else{
-                   //Em outras situações os dois serão habilitados
-                   $("#next").prop('disabled',false);            
-                   $("#prev").prop('disabled',false);
-               }
-               $("#passo").html(index + 1);
-       
-           };
-           
-           //Executa a função ao carregar a página
-           passoexibido();
-       
-           //avança para o próximo passo
-           $("#next").click(function(){
-               $(".step:visible").hide().next().show();
-               passoexibido();
-           });
-       
-           //retrocede para o passo anterior
-           $("#prev").click(function(){
-               $(".step:visible").hide().prev().show();
-               passoexibido();
-           });
-       
-        });
-       </script>
-
 @endsection

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+   <!-- CSS only -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{URL::asset('css/estilo.css')}}">
   </head>
@@ -16,30 +17,63 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto" style="width: 0rem;">
               @guest
+              
               <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="/login"><button type="button" class="btn btn-warning">Login</button></a></li>
               <li class="nav-item"> <a class="nav-link text-dark" aria-current="page" href="/register"><button type="button" class="btn btn-warning">Cadastrar</button></a></li>
+    
               @endguest
+
               <li class="nav-item"> <a class="nav-link text-dark" href="#">Conceitos</a></li>
               <li class="nav-item"> <a class="nav-link text-dark" href="#">Sobre</a></li>
               @auth
+              @if (auth()->user()->userType == 'user')
+              <li class="nav-item"> <a class="nav-link text-dark" href="http://portal_neabi/eventos">Inscrições</a></li> 
+              @endif
+              @if (auth()->user()->userType == 'admin')
               <li class="nav-item"><a class="nav-link text-dark" aria-current="page" href="{{route('evento.index')}}">Eventos</a></li>
               <li class="nav-item"> <a class="nav-link text-dark" href="{{route('noticia.index')}}">Notícias</a></li>
-              <li class="-item"> 
-                <form action="/logout" method="POST">
-                  @csrf
-                  <a href="logout" class="nav-link" onclick="event.preventDefault();
-                  this.closest('form').submit();" >
-                  Sair
-                    </a>
-                </form>
-              </li>
+              @endif
+              <div class="dropdown">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="" id="navbarScrollingDropdown" role="button"  data-bs-toggle="dropdown" aria-expanded="false">
+                        {{auth()->user()->name}}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li claas="nav-item dropdown"> 
+                        <a href="#"> {{auth()->user()->userType}} </a>
+                        </li>
+                        <li class ="nav-item dropdown">
+                          <a href="/user/profile">editar informações</a>
+                        </li>
+                        <li  class ="nav-item dropdown"> 
+                          <a class="dropdown-item" href="#">
+                                <form  action="/logout" method="POST">
+                                      @csrf
+                                      <a href="logout" onclick="event.preventDefault();
+                                      this.closest('form').submit();" >
+                                      <h3>Sair</h3>
+                                    </a>
+                                </form>
+                          </a>     
+                        </li>
+                      </ul>
+                    </li> 
+               </div> 
+                <li class="nav-item"> <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a></li>
               @endauth
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> 
     </header>
-    @yield('content')              
+    <div class="container-fluid">
+      <div class ="row">
+        @if (session('msg'))
+          <p class="msg">{{session('msg')}}</p>    
+        @endif
+      </div>
+    </div>
+    @yield('content') 
     <footer class="footer">
       <div class="container p-6">
         <div class="row justify-content-md-center">
@@ -74,9 +108,7 @@
         </div>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"> </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
   </body>
 </html>

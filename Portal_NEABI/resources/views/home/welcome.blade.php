@@ -14,78 +14,65 @@
       </section>
       <main class="container main_noticias">
         <div class="row">
-          <div class="col-sm-12 text-dark text-center my-3">
-            <div class="destaque">
-              <h2>Notícias</h2>
-            </div>
+              <div class="col-sm-12 text-dark text-center my-4" >
+                <div class="destaque">
+                  <h2>Notícias</h2>
+                </div>
+              </div>
+    
+                    @if ($noticias)
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                            @foreach ($noticias as $noticia)
+  
+                              <div class="col">
+                                <div class="card h-100">
+                                  <img src="../img/imagens/{{$noticia->url}}" class="card-img-top" alt="{{$noticia->titulo}}"  height="250">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{$noticia->titulo}}</h5>
+                                    <p class="card-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                    </svg> {{date('d/m/y', strtotime($noticia->data_edicao))}}</p>
+                                  </p><a class="btn btn-warning" href="{{route('noticia.show',$noticia->id)}}"><b>Visualizar</b></a>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                            @endforeach
+                    </div>        
+
+                        
+                    @else
+                        
+                     <p><strong>Não Temos Nóticias no Momento :(</strong></p>       
+                    @endif        
+                  </div>
+              </div>  
+                  <hr>
+                  <div class="col-sm-12 text-dark text-center my-3">
+                    <div class="destaque">
+                      <h2>Eventos</h2>
+                    </div>
+                  </div>
+                  
+                  @if ($eventos)
+                  <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @foreach ($eventos as $evento)
+                    <div class="col">
+                      <div class="card h-100">
+                        <img src="../img/imagens/{{$evento->url}}" class="card-img-top" alt="{{$evento->nome}}" height="250" >
+                        <div class="card-body">
+                          <h5 class="card-title">{{$evento->nome}}</h5>
+                          <p class="card-text">{{$evento->categoria}}</p>
+                        </p><a class="btn btn-warning" href="{{route('evento.show',$evento->id)}}"><b>Visualizar</b></a>
+                        </div>
+                      </div>
+                    </div> 
+                    @endforeach
+                  </div>      
+                    @else
+                        <p><strong>ão temos nenhum evento no momento ainda :(<strong></p>
+                  @endif  
           </div>
-        </div>
-        <section class="container-fluid">
-          <div class="row justify-content-center">
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/consciencia negra pau dos ferros.png" width="300px" height="200px" alt="conciencia negra em pdf">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">V Semana da Consciência Negra acontece de 18 a 21 de novembro</h5>
-                  <p class="card-text">
-                    Evento traz como tema: "Denegrindo identidades: com quantos adjetivos
-                    mascaram quem você é?"
-                  </p><a class="btn btn-warning" href="news/Pau dos Ferros.html"> <b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/novembro negro.jpeg" width="300px" height="200px" alt="semana negra em pdf">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">
-                    Neabi do Campus Pau dos Ferros promove a 1ª Semana da Diversidade Étnica
-                    e da Consciência Negra
-                  </h5>
-                  <p class="card-text"> Evento acontecerá de 17 a 21 de novembro</p><a class="btn btn-warning" href="news/novembro negro.html"> <b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/encontro NEABI.jpeg" width="300px" height="200px" alt="encontro">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">Núcleos de Estudos Afro Brasileiros e Indígenas realizam encontro</h5>
-                  <p class="card-text">
-                    Encontro marcou o retorno da formação continuada para servidores
-                    integrantes da rede de NEABI's
-                  </p><a class="btn btn-warning" href="news/NEABI realiza encontro.html"> <b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/IV Semana de Negritude Campus PDF.jpeg" width="300px" height="200px" alt="conciencia negra em pdf">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">
-                    Campus Pau dos Ferros realizará a IV Semana Negritudes e Diversidades,
-                    através do Núcleo de Estudos Afro-Brasileiros e Indígenas (NEABI)
-                  </h5>
-                  <p class="card-text"> Inscrições estão já estão abertas e o evento acontece de 19 a 21 de novembro</p><a class="btn btn-warning" href="news/Campus Pau dos Ferros realizara a IV Semana Negritudes e Diversidades.html"><b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/III semanada da CN em JC.png" width="300px" height="200px" alt="semana negra">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">NEABI promove III Semana da Consciência Negra do Campus João Câmara</h5>
-                  <p class="card-text">
-                    Evento acontece nos dias 22 e 23 de novembro e contará com palestras, apresentações
-                    culturais, exposição de fotografias, entre outros
-                  </p><a class="btn btn-warning" href="news/III semana da CN em JC.html"><b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 m-4 col-md-4" style="width: 18rem;">
-              <div class="card"><img class="card-img-top" src="img/consciencia negra.png" width="300px" height="200px" alt="logomarca_vencedoraa">
-                <div class="card-body">
-                  <h5 class="card-title text-warning">Professora e estudantes destacam a importância do IFRN para se reconhecerem negras</h5>
-                  <p class="card-text">Roda de conversa on-line integrou a programação da Semana da Consciência Negra dos campi Canguaretama e Apodi.</p><a class="btn btn-warning" href="news/importancia de se reconhecer negra.html"><b>Visualizar</b></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-</main>
+          </div> 
+      </main>
 @endsection

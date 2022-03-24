@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', 'Criar Evento')
 @section('content')
-<link rel="stylesheet" href={{URL::asset('css/noticia/create.css')}}>
+<link rel="stylesheet" href={{URL::asset('css/evento/index.css')}}>
 <main class="container">
   <div class ="index">
   <h2><a href="{{route('evento.create')}}">Criar uma Evento</a></h2>
@@ -10,16 +10,22 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Nome</th>
+            <th scope="col">Participantes</th>
             <th scope="col">status</th>
             <th scope="col">acões</th>
           </tr>
         </thead>
         <tbody>
-            @foreach ($eventos as $e)
+          @foreach ($eventos as $e)
           <tr>
                         <th>{{$e->id}}</th>
-                        <td>{{$e->nome}}</td>
-                        <td>{{$e->status}}</td>
+                        <td>{{$e->nome}} </td>
+                        <td>{{count($e->users)}}</td>
+                        <td>@if ($e->status == 1)
+                            Ativo
+                        @else
+                            Cancelado
+                        @endif</td>
                         <td>
                            <div class="row justify-content-center">
                             <div class="col">
@@ -45,8 +51,9 @@
                             </div> 
                            </div>  
                         </td>
+                      
           </tr>
-          @endforeach  
+          @endforeach
         </tbody>
       </table>
   </div>

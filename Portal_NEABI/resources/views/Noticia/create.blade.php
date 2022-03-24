@@ -5,14 +5,16 @@
 <main class="container">
     <div class="create"> 
             <h2>Crie sua Notícia aqui!</h2>
-            <form action="{{route('noticia.store')}}" method="POST">
+            <form action="{{route('noticia.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input class="form-control form-control-lg" name='titulo' type="text" placeholder="titulo da Notícia?" aria-label=".form-control-lg example">
                 <label for="exampleFormControlTextarea1" class="form-label"></label>
-                <textarea class="form-control" name='descricao' id="exampleFormControlTextarea1" rows="3" placeholder="Descreva sua Notícia?"></textarea>
+                <textarea class="form-control" name='descricao' id="exampleFormControlTextarea1" rows="10" placeholder="Descreva sua Notícia?"></textarea>
                        <hr>
-                <label for="formFileLg" class="form-label">URL da imagem</label>       
-                <input class="form-control form-control-lg" id="formFileLg" type="text" name="url">
+                       <div>
+                       <label for="formFileLg" class="form-label">Imagen Do Evento</label>
+                       <input name= "url" class="form-control form-control-lg" id="formFileLg" type="file">
+                     </div>
                         <hr>
                 <label for="exampleDataList" class="form-label">Categoria</label>
                                             <input class="form-control" name='categoria' list="datalistOptions" id="exampleDataList" placeholder="Escolha a categoria para a notícia">
@@ -28,6 +30,17 @@
                                                 <button class="btn btn-primary" type="submit" value='salvar'>Enviar</button>
                                             </div>
             </form>
-    </div>        
+            @if ($errors->any())
+                    <div class="card-footer"></div>
+                    @foreach ($errors->all as $erro)
+                        <div claass="alert alert-danger" role="alert">
+                            {{$erro}}
+                        </div>  
+                    @endforeach
+         @endif
+    </div>  
+    @if (isset($erros))
+            {{var_dump($erros)}}  
+    @endif
 </main>
 @endsection

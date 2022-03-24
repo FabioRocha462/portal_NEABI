@@ -58,4 +58,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function eventos(){
+        return $this->hasMany('App\Models\Evento');
+    }
+
+    public function noticias(){
+        return $this->hasMany('App\Models\Noticia');
+    }
+    
+    public function eventosParticipante(){
+        return $this->belongsToMany('App\Models\Evento');
+    }
+   
 }

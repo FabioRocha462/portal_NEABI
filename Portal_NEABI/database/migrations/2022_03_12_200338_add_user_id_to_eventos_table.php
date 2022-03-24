@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('noticias', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string("titulo");
-            $table->text("descricao");
-            $table->string("url")->nullable();
-            $table->string("categoria");
-            $table->date("data_edicao");
+        Schema::table('eventos', function (Blueprint $table) {
+            //
+            $table->foreignId('user_id')->constrained();
         });
     }
 
@@ -31,6 +26,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('noticias');
+        Schema::table('eventos', function (Blueprint $table) {
+            //
+            $table->foreignId('user_id')
+            ->constrained()
+            ->onDelete('cascade');
+
+        });
     }
 };

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 main{
     font-family: "Poppins", sans-serif;
-    min-height: 100vh;
+    min-height: 50vh;
     min-width: 100vh;
     display: flex;
     align-items: center;
@@ -10,7 +10,6 @@ main{
  .index{
  
     min-width: 100px;
-     min-height: 500px;
-    box-shadow: 5px 5px 15px rgba(0,0,0,2);
-    border-radius:8px;
+     min-height: 100px;
+  
  }

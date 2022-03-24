@@ -3,7 +3,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ParticipanteController;
-use App\Http\Controllers\Auth;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.welcome');
 });
+
 /*
 Route::get('admin/login', function () {
     return view('Admin/login');
@@ -38,10 +39,10 @@ Route::resource('admin', AdminController::class)->except([
     'create', 'store', 'update', 'destroy'
 ]);
 */
-Route::resource('admin', AdminController::class);
-Route::resource('participante',ParticipanteController::class);
-Route::resource('noticia',NoticiaController::class);
-Route::resource('evento',EventoController::class); 
+Route::resource('admin', AdminController::class)->middleware('auth');
+Route::resource('participante',ParticipanteController::class)->middleware('auth');
+Route::resource('noticia',NoticiaController::class)->middleware('auth');
+Route::resource('evento',EventoController::class)->middleware('auth'); 
 /*
 Route::get('/criando', function(){
     return view('participante/create');
@@ -54,4 +55,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
     return view('home.welcome');
 })->name('dashboard');
 
-
+Route::post('/evento/participar/{id}',[EventoController::class, 'participar'])->middleware('auth');
+Route::get('/eventos',[EventoController::class, 'showEventos'])->middleware('auth');
+Route::delete('/evento/sairEvento/{id}', [EventoController::class, 'cancelarInscricao'])->middleware('auth');
+Route::post('/evento/usuarios/{id}',[EventoController::class, 'nameUsers'])->middleware('auth');
