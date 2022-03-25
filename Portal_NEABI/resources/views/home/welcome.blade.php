@@ -55,23 +55,27 @@
                   </div>
                   
                   @if ($eventos)
-                  <div class="row row-cols-1 row-cols-md-3 g-4">
-                    @foreach ($eventos as $evento)
-                    <div class="col">
-                      <div class="card h-100">
-                        <img src="../img/imagens/{{$evento->url}}" class="card-img-top" alt="{{$evento->nome}}" height="250" >
-                        <div class="card-body">
-                          <h5 class="card-title">{{$evento->nome}}</h5>
-                          <p class="card-text">{{$evento->categoria}}</p>
-                        </p><a class="btn btn-warning" href="{{route('evento.show',$evento->id)}}"><b>Visualizar</b></a>
-                        </div>
-                      </div>
-                    </div> 
-                    @endforeach
-                  </div>      
-                    @else
+                      <div class="row row-cols-1 row-cols-md-3 g-4">
+                        @foreach ($eventos as $evento)
+                        @if($evento->status == 1)
+                            
+                        
+                            <div class="col">
+                              <div class="card h-100">
+                                <img src="../img/imagens/{{$evento->url}}" class="card-img-top" alt="{{$evento->nome}}" height="250" >
+                                <div class="card-body">
+                                  <h5 class="card-title">{{$evento->nome}}</h5>
+                                  <p class="card-text">{{$evento->categoria}}</p>
+                                </p><a class="btn btn-warning" href="{{route('evento.show',$evento->id)}}"><b>Visualizar</b></a>
+                                </div>
+                              </div>
+                            </div> 
+                          @endif  
+                            @endforeach
+                          </div>        
+                   @else
                         <p><strong>ão temos nenhum evento no momento ainda :(<strong></p>
-                  @endif  
+                   @endif  
           </div>
           </div> 
       </main>
